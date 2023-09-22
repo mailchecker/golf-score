@@ -1,7 +1,6 @@
 import streamlit as st
 from operator import itemgetter
 
-
 st.title('Golf Score Ranker')
 
 # 선택한 인원 수 및 성적하위 값을 받아옵니다.
@@ -12,7 +11,7 @@ num_bottom = st.selectbox('성적하위', list(range(1, min(num_players + 1, 11)
 players = []
 
 for i in range(num_players):
-    col1, col2, col3, col4 = st.beta_columns(4)
+    col1, col2, col3, col4 = st.columns(4)
     name = col1.text_input(f"Player {i + 1} Name", key=f"name_{i}")
     strokes = col2.number_input("Strokes", value=0, key=f"strokes_{i}")
     handicap = col3.number_input("Handicap", value=0.0, key=f"handicap_{i}")
