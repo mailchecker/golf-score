@@ -11,11 +11,13 @@ num_bottom = st.selectbox('성적하위', list(range(1, min(num_players + 1, 11)
 players = []
 
 for i in range(num_players):
-    name = st.text_input(f"Player {i + 1} Name")
-    strokes = st.number_input(f"Player {i + 1} Strokes", value=0)
-    handicap = st.number_input(f"Player {i + 1} Handicap", value=0.0)
+    col1, col2, col3, col4 = st.beta_columns(4)
+    name = col1.text_input(f"Player {i + 1} Name", key=f"name_{i}")
+    strokes = col2.number_input("Strokes", value=0, key=f"strokes_{i}")
+    handicap = col3.number_input("Handicap", value=0.0, key=f"handicap_{i}")
     net = strokes - handicap
-    players.append({'name': name, 'net': net})
+    col4.text(f"Net: {net}")
+    players.append({'name': name, 'net': net, 'strokes': strokes, 'handicap': handicap})
 
 if st.button('Sort'):
     players = sorted(players, key=itemgetter('net'))
@@ -27,7 +29,7 @@ st.write('---')
 st.write('성적하위:')
 
 for player in bottom_players:
-    st.write(f"{player['name']} (Net: {player['net']})")
+    st.write(f"{player['name']} - Strokes: {player['strokes']}, Handicap: {player['handicap']}, Net: {player['net']}")
 
 if st.button('Reset'):
     st.experimental_rerun()
