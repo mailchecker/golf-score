@@ -84,6 +84,8 @@ if selected_date and selected_date in data:
 
     st.write(data)
     st.write(selected_date)
+    st.write(data[selected_date].values())
+    
     
     selected_data = list(data[selected_date].values())
     if selected_data:  # 선택된 날짜에 대한 데이터가 존재하는지 확인
