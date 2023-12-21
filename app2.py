@@ -84,6 +84,20 @@ if selected_date:
     selected_data = list(data[selected_date].values())
     # 데이터를 DataFrame으로 변환
     df = pd.DataFrame(selected_data)
+
+
+    # 열 삭제 기능
+    if len(df.columns) > 0:
+        delete_col_name = st.selectbox("삭제할 열 선택", options=df.columns)
+        if st.button("열 삭제"):
+            if delete_col_name in df.columns:
+                df = df.drop(columns=[delete_col_name])  # 열 삭제
+                data[selected_date] = df.to_dict('records')  # 변경된 데이터를 JSON으로 다시 저장
+                write_json("golfers_data.json", data)
+                st.experimental_rerun()
+
+    
+    
     # 최종 결과에 따라 정렬
     df = df.sort_values(by='result')
     # 테이블 형태로 표시
