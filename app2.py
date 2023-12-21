@@ -76,8 +76,6 @@ if submit_button:
     # JSON 파일 쓰기
     write_json("golfers_data.json", data)
 
-
-
 # 날짜별 데이터 조회
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
