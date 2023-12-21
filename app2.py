@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import pandas as pd
 from datetime import datetime
 
 # JSON 파일 읽기 함수
@@ -60,26 +61,28 @@ date = st.date_input("날짜")
 # 저장 버튼
 submit_button = st.button('저장')
 
-# 저장 버튼 눌렀을 때의 처리
+# 데이터 저장 버튼 눌렀을 때의 처리
 if submit_button:
     # JSON 파일 읽기
     data = read_json("golfers_data.json")
 
-    # 현재 날짜의 데이터 저장
+    # 현재 날짜의 데이터 업데이트 또는 추가
     date_str = date.strftime("%Y-%m-%d")
     if date_str not in data:
-        data[date_str] = []
-    data[date_str].extend(golfers_data)
+        data[date_str] = {}
+    for golfer in golfers_data:
+        data[date_str][golfer['name']] = golfer  # 이름을 키로 사용
 
     # JSON 파일 쓰기
     write_json("golfers_data.json", data)
 
-# 날짜별 데이터 조회
+# 날짜별 데이터 조회 및 테이블 형태로 표시
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
-    selected_data = data[selected_date]
-    # 데이터를 최종 결과에 따라 정렬
-    sorted_data = sorted(selected_data, key=lambda x: x['result'])
-    # 표시
-    for golfer in sorted_data:
-        st.write(golfer)
+    selected_data = list(data[selected_date].values())
+    # 데이터를 DataFrame으로 변환
+    df = pd.DataFrame(selected_data)
+    # 최종 결과에 따라 정렬
+    df = df.sort_values(by='result')
+    # 테이블 형태로 표시
+    st.table(df)
