@@ -81,7 +81,7 @@ selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()
 
 # 선택된 날짜가 data 딕셔너리의 키로 존재하는지 확인
 if selected_date and selected_date in data:
-
+    st.write("ok")
 else:
     st.write("선택된 날짜에 대한 데이터가 없습니다.")
 
