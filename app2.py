@@ -1,6 +1,5 @@
 import streamlit as st
 import json
-import pandas as pd
 from datetime import datetime
 
 # JSON 파일 읽기 함수
@@ -25,26 +24,36 @@ data = read_json("golfers_data.json")
 # 골퍼 수 선택
 number_of_golfers = st.selectbox('골퍼 수 선택', range(1, 11))
 
-# 입력 폼 생성
-with st.form(key='golfer_form'):
-    golfers_data = []
-    for i in range(number_of_golfers):
-        with st.container():
-            name = st.text_input(f'골퍼 {i+1} 이름', key=f'name_{i}')
-            stroke = st.number_input(f'스트로크 {i+1}', min_value=0, key=f'stroke_{i}')
-            handicap = st.number_input(f'핸디캡 {i+1}', min_value=0, key=f'handicap_{i}')
+# 입력값 변경시 호출될 함수
+def update_result(index):
+    stroke_key = f'stroke_{index}'
+    handicap_key = f'handicap_{index}'
+    result_key = f'result_{index}'
 
-            # 최종결과 자동 계산
-            result = stroke - handicap
-            golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
+    # 최종 결과 계산 및 저장
+    st.session_state[result_key] = st.session_state.get(stroke_key, 0) - st.session_state.get(handicap_key, 0)
 
-            # 최종결과 표시
-            st.text(f'골퍼 {i+1} 최종결과: {result}')
-    
-    submit_button = st.form_submit_button(label='저장')
+# 골퍼별 입력칸 배열
+golfers_data = []
+for i in range(number_of_golfers):
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        name = st.text_input(f'골퍼 {i+1} 이름', key=f'name_{i}')
+    with col2:
+        stroke = st.number_input(f'스트로크', min_value=0, key=f'stroke_{i}', on_change=update_result, args=(i,))
+    with col3:
+        handicap = st.number_input(f'핸디캡', min_value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
+    with col4:
+        result = st.session_state.get(f'result_{i}', 0)
+        st.write('최종결과:', result)
+
+    golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
 # 날짜 입력 추가
 date = st.date_input("날짜")
+
+# 저장 버튼
+submit_button = st.button('저장')
 
 # 저장 버튼 눌렀을 때의 처리
 if submit_button:
