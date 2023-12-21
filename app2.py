@@ -31,7 +31,10 @@ def update_result(index):
     result_key = f'result_{index}'
 
     # 최종 결과 계산 및 저장
-    st.session_state[result_key] = st.session_state.get(stroke_key, 0) - st.session_state.get(handicap_key, 0)
+    stroke = st.session_state.get(stroke_key, 0)
+    handicap = st.session_state.get(handicap_key, 0)
+    st.session_state[result_key] = stroke - handicap
+
 
 
 # 골퍼별 입력칸 배열
@@ -45,8 +48,9 @@ for i in range(number_of_golfers):
     with col3:
         handicap = st.number_input(f'핸디캡', min_value=-100, value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
     with col4:
-        result = str(st.session_state.get(f'result_{i}', 0))
-        st.number_input(f'최종결과', min_value=-200, value=0, key=f'result_{i}')
+        # '최종결과' 입력칸을 숫자 형식으로 변경
+        result = st.session_state.get(f'result_{i}', 0)
+        st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True, min_value=-200)
 
     golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
