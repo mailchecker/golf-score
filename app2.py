@@ -81,6 +81,7 @@ if submit_button:
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
 
+    st.write(data[selected_date])
     selected_data = list(data[selected_date].values())
 
     # 데이터를 DataFrame으로 변환
