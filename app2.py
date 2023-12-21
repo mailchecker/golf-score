@@ -86,15 +86,6 @@ if selected_date:
     df = pd.DataFrame(selected_data)
 
 
-    # 골퍼 삭제 기능
-    golfer_names = df['name'].tolist()  # 골퍼 이름 목록
-    delete_golfer_name = st.selectbox("삭제할 골퍼 선택", options=golfer_names)
-    if st.button("골퍼 삭제"):
-        # 선택된 골퍼 이름에 해당하는 데이터를 삭제
-        df = df[df['name'] != delete_golfer_name]
-        data[selected_date] = df.to_dict('records')  # 변경된 데이터를 JSON으로 다시 저장
-        write_json("golfers_data.json", data)
-        st.experimental_rerun()
 
     
     
