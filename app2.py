@@ -33,6 +33,7 @@ def update_result(index):
     # 최종 결과 계산 및 저장
     st.session_state[result_key] = st.session_state.get(stroke_key, 0) - st.session_state.get(handicap_key, 0)
 
+
 # 골퍼별 입력칸 배열
 golfers_data = []
 for i in range(number_of_golfers):
