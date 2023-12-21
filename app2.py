@@ -81,7 +81,7 @@ selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()
 if selected_date:
     selected_data = data[selected_date]
     # 데이터를 최종 결과에 따라 정렬
-    sorted_data = sorted(selected_data, key=lambda x: x['result'])
+    # sorted_data = sorted(selected_data, key=lambda x: x['result'])
     # 표시
     for golfer in sorted_data:
         st.write(golfer)
