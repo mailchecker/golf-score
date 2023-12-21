@@ -83,7 +83,7 @@ selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()
 if selected_date:
 
     st.write(selected_date)
-    st.write(data[selected_date].values())
+    st.write(data[selected_date])
     selected_data = list(data[selected_date].values())
 
 
