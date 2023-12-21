@@ -41,12 +41,12 @@ for i in range(number_of_golfers):
     with col1:
         name = st.text_input(f'골퍼 {i+1} 이름', key=f'name_{i}')
     with col2:
-        stroke = st.number_input(f'스트로크', min_value=0, key=f'stroke_{i}', on_change=update_result, args=(i,))
+        stroke = st.number_input(f'스트로크', min_value=-100, key=f'stroke_{i}', on_change=update_result, args=(i,))
     with col3:
-        handicap = st.number_input(f'핸디캡', min_value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
+        handicap = st.number_input(f'핸디캡', min_value=-100, key=f'handicap_{i}', on_change=update_result, args=(i,))
     with col4:
         result = str(st.session_state.get(f'result_{i}', 0))
-        st.number_input('최종결과', min_value=-100, value=result, key=f'result_{i}', disabled=True)
+        st.number_input(f'최종결과', min_value=-200, value=result, key=f'result_{i}')
 
     golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
