@@ -66,12 +66,10 @@ if submit_button:
     # JSON 파일 읽기
     data = read_json("golfers_data.json")
 
-    # 날짜에 해당하는 키가 없거나 딕셔너리가 아닌 경우, 새로운 딕셔너리를 생성
-    date_str = date.strftime("%Y-%m-%d")
-    if date_str not in data or not isinstance(data[date_str], dict):
-        data[date_str] = {}
-
     # 현재 날짜의 데이터 업데이트 또는 추가
+    date_str = date.strftime("%Y-%m-%d")
+    if date_str not in data:
+        data[date_str] = {}
     for golfer in golfers_data:
         data[date_str][golfer['name']] = golfer  # 이름을 키로 사용
 
