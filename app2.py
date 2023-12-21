@@ -78,14 +78,19 @@ if submit_button:
 
 # 날짜별 데이터 조회 및 테이블 형태로 표시
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()), index=0)
-if selected_date in data:
+
+# 선택된 날짜가 data 딕셔너리의 키로 존재하는지 확인
+if selected_date and selected_date in data:
     selected_data = list(data[selected_date].values())
-    # 데이터를 DataFrame으로 변환
-    df = pd.DataFrame(selected_data)
-    # 최종 결과에 따라 정렬
-    df = df.sort_values(by='result')
-    # 테이블 형태로 표시
-    st.table(df)
+    if selected_data:  # 선택된 날짜에 대한 데이터가 존재하는지 확인
+        # 데이터를 DataFrame으로 변환
+        df = pd.DataFrame(selected_data)
+        # 최종 결과에 따라 정렬
+        df = df.sort_values(by='result')
+        # 테이블 형태로 표시
+        st.table(df)
+    else:
+        st.write("선택된 날짜에 대한 데이터가 없습니다.")
 else:
     st.write("선택된 날짜에 대한 데이터가 없습니다.")
 
