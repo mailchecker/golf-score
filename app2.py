@@ -20,7 +20,7 @@ def write_json(filename, data):
 st.title('골퍼 스코어 관리 시스템')
 
 # 데이터 파일 로드 (혹은 초기화)
-data = read_json("golfers_data.json")
+data = read_json("golfers_data1.json")
 
 # 골퍼 수 선택
 number_of_golfers = st.selectbox('골퍼 수 선택', range(1, 11))
@@ -64,7 +64,7 @@ submit_button = st.button('저장')
 # 데이터 저장 버튼 눌렀을 때의 처리
 if submit_button:
     # JSON 파일 읽기
-    data = read_json("golfers_data.json")
+    data = read_json("golfers_data1.json")
 
     # 현재 날짜의 데이터 업데이트 또는 추가
     date_str = date.strftime("%Y-%m-%d")
@@ -74,7 +74,7 @@ if submit_button:
         data[date_str][golfer['name']] = golfer  # 이름을 키로 사용
 
     # JSON 파일 쓰기
-    write_json("golfers_data.json", data)
+    write_json("golfers_data1.json", data)
 
 
 st.write(data)
