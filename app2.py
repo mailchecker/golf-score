@@ -83,9 +83,10 @@ selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()
 if selected_date:
 
     st.write(selected_date)
+    st.write(data[selected_date].values())
     selected_data = list(data[selected_date].values())
 
-    st.write(selected_data)
+
     # 데이터를 DataFrame으로 변환
     df = pd.DataFrame(selected_data)
     # 최종 결과에 따라 정렬
