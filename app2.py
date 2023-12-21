@@ -84,6 +84,7 @@ if selected_date:
     # sorted_data = sorted(selected_data, key=lambda x: x['result'])
     # 표시
     # for golfer in sorted_data:
-        st.write(golfer)
+    # st.write(golfer)
+    st.write(selected_data)
 
 
