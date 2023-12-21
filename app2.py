@@ -76,15 +76,29 @@ if submit_button:
     # JSON 파일 쓰기
     write_json("golfers_data.json", data)
 
+
+
 # 날짜별 데이터 조회
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
-    selected_data = data[selected_date]
+    selected_data = list(data[selected_date].values())
+    # 데이터를 DataFrame으로 변환
+    df = pd.DataFrame(selected_data)
+    # 최종 결과에 따라 정렬
+    df = df.sort_values(by='result')
+    # 테이블 형태로 표시
+    st.table(df)
+    
+
+# 날짜별 데이터 조회
+#selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
+#if selected_date:
+    #selected_data = data[selected_date]
     # 데이터를 최종 결과에 따라 정렬
     # sorted_data = sorted(selected_data, key=lambda x: x['result'])
     # 표시
     # for golfer in sorted_data:
     # st.write(golfer)
-    st.write(selected_data)
+    #st.write(selected_data)
 
 
