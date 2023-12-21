@@ -44,8 +44,9 @@ for i in range(number_of_golfers):
     with col3:
         handicap = st.number_input(f'핸디캡', min_value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
     with col4:
+        # '최종결과' 읽기 전용 입력칸
         result = st.session_state.get(f'result_{i}', 0)
-        st.write('최종결과:', result)
+        st.text_input('최종결과', value=result, key=f'result_{i}', disabled=True)
 
     golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
