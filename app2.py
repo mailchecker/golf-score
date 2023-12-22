@@ -99,6 +99,7 @@ if submit_button:
     st.write(golfers_data)
     
     for golfer in golfers_data:
+        st.write(golfers)
         if golfer['name']:  # 골퍼 이름이 비어있지 않은 경우에만 추가
             data[date_str].append(golfer)
 
