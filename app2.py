@@ -87,7 +87,7 @@ if selected_date:
     st.write("-------------------")    
     st.write(data[selected_date])
     st.write("-------------------")
-    st.write(data[selected_date].values())
+    st.write(data[selected_date])
     st.write("-------------------")
     selected_data = list(data[selected_date].values())
 
