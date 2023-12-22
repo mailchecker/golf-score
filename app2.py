@@ -87,6 +87,8 @@ if selected_date:
     st.write("-------------------")    
     st.write(data[selected_date])
     st.write("-------------------")
+    st.write(data[selected_date].values())
+    st.write("-------------------")
     selected_data = list(data[selected_date].values())
 
     # 데이터를 DataFrame으로 변환
