@@ -38,12 +38,6 @@ st.title('스코어 관리 시스템')
 # 데이터 파일 로드 (혹은 초기화)
 data = read_json("golfers_data.json")
 
-# 데이터 파일 삭제 (혹은 초기화)
-if st.button('JSON 파일 삭제'):
-    delete_json("golfers_data.json")
-
-
-
 # 골퍼 수 선택
 number_of_golfers = st.selectbox('골퍼 수 선택', range(1, 11))
 
@@ -57,8 +51,6 @@ def update_result(index):
     stroke = st.session_state.get(stroke_key, 0)
     handicap = st.session_state.get(handicap_key, 0)
     st.session_state[result_key] = stroke - handicap
-
-
 
 # 골퍼별 입력칸 배열
 golfers_data = []
@@ -139,13 +131,14 @@ if selected_date in data:
             data[selected_date] = [golfer for golfer in selected_data if golfer['name'] != delete_golfer_name]
             write_json("golfers_data.json", data)
             st.experimental_rerun()
-            
 else:
     st.write("선택된 날짜에 골퍼 정보가 없습니다.")
     
 
 
-
+# 데이터 파일 삭제 (혹은 초기화)
+#if st.button('전체초기화'):
+#    delete_json("golfers_data.json")
 
 
 
