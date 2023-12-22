@@ -100,11 +100,6 @@ if submit_button:
     st.write(golfers_data)
     
     for golfer in golfers_data:
-        st.write('------golfer-----')
-        st.write(golfer)
-        st.write('------date_str-----')
-        st.write(date_str)
-        
         if golfer['name']:  # 골퍼 이름이 비어있지 않은 경우에만 추가
             data[date_str].append(golfer)
 
@@ -116,21 +111,19 @@ if submit_button:
 # 날짜별 데이터 조회 및 처리
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 
-st.write('-----')
-st.write(data)
-st.write(data[selected_date])
-st.write('-----')
+#st.write('-----')
+#st.write(data)
+#st.write(data[selected_date])
+#st.write('-----')
 
-if selected_date in data:
-    st.write("데이터 타입:", type(data[selected_date]))
-    st.write("데이터 내용:", data[selected_date])
-
-    try:
-        values = data[selected_date].values()
-        st.write(values)
-    except AttributeError as e:
-        st.error(f"오류 발생: {e}")
-        
+#if selected_date in data:
+#    st.write("데이터 타입:", type(data[selected_date]))
+#    st.write("데이터 내용:", data[selected_date])
+#    try:
+#        values = data[selected_date].values()
+#        st.write(values)
+#    except AttributeError as e:
+#        st.error(f"오류 발생: {e}")
 
 if selected_date in data:
     selected_data = data[selected_date]  # '.values()' 호출 제거
