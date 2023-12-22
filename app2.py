@@ -121,7 +121,19 @@ st.write(data)
 st.write(data[selected_date])
 st.write('-----')
 
+if selected_date in data:
+    st.write("데이터 타입:", type(data[selected_date]))
+    st.write("데이터 내용:", data[selected_date])
+
+    try:
+        values = data[selected_date].values()
+        st.write(values)
+    except AttributeError as e:
+        st.error(f"오류 발생: {e}")
+        
+
 if selected_date:
+   
     if selected_date in data and data[selected_date]:
         selected_data = list(data[selected_date].values())
         df = pd.DataFrame(selected_data)
