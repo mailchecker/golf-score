@@ -132,13 +132,12 @@ if selected_date in data:
         st.error(f"오류 발생: {e}")
         
 
-if selected_date:
-   
-    if selected_date in data and data[selected_date]:
-        selected_data = list(data[selected_date].values())
-        df = pd.DataFrame(selected_data)
-        df = df.sort_values(by='result') if not df.empty else df
-        st.table(df)
+if selected_date in data:
+    selected_data = data[selected_date]  # '.values()' 호출 제거
+    df = pd.DataFrame(selected_data)
+    df = df.sort_values(by='result') if not df.empty else df
+    st.table(df)
+
 
         # 골퍼 삭제 기능
         golfer_names = df['name'].tolist()
@@ -148,14 +147,11 @@ if selected_date:
             data[selected_date] = df.to_dict('records')
             write_json("golfers_data.json", data)
             st.experimental_rerun()
-    else:
-        st.write("선택된 날짜에 골퍼 정보가 없습니다.")
-        # 새 데이터 추가 로직
-        if st.button("새 골퍼 정보 추가"):
-            data[selected_date] = golfers_data
-            write_json("golfers_data.json", data)
-            st.experimental_rerun()
             
+else:
+    st.write("선택된 날짜에 골퍼 정보가 없습니다.")
+    
+
 
 
 
