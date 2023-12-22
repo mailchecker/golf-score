@@ -138,13 +138,12 @@ if selected_date in data:
     df = df.sort_values(by='result') if not df.empty else df
     st.table(df)
 
-
-        # 골퍼 삭제 기능
-        golfer_names = df['name']
-        delete_golfer_name = st.selectbox("삭제할 골퍼 선택", options=golfer_names)
+    # 골퍼 삭제 기능
+    if not df.empty:
+        delete_golfer_name = st.selectbox("삭제할 골퍼 선택", df['name'])
         if st.button("골퍼 삭제"):
-            df = df[df['name'] != delete_golfer_name]
-            data[selected_date] = df.to_dict('records')
+            # 선택된 골퍼 이름에 해당하는 데이터를 삭제
+            data[selected_date] = [golfer for golfer in selected_data if golfer['name'] != delete_golfer_name]
             write_json("golfers_data.json", data)
             st.experimental_rerun()
             
