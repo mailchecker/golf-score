@@ -17,7 +17,7 @@ def write_json(filename, data):
         json.dump(data, file, indent=4)
 
 # 애플리케이션 헤더
-st.title('골퍼 스코어 관리 시스템')
+st.title('스코어 관리 시스템')
 
 # 데이터 파일 로드 (혹은 초기화)
 data = read_json("golfers_data1.json")
@@ -81,7 +81,12 @@ if submit_button:
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
 
+    st.write(selected_date)
+    st.write("-------------------")
+    st.write(data)
+    st.write("-------------------")    
     st.write(data[selected_date])
+    st.write("-------------------")
     selected_data = list(data[selected_date].values())
 
     # 데이터를 DataFrame으로 변환
