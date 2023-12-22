@@ -85,6 +85,8 @@ if selected_date:
     st.write("-------------------")
     st.write(data)
     st.write("-------------------")    
+    st.write(data.values())
+    st.write("-------------------")    
     st.write(data[selected_date])
     st.write("-------------------")
     st.write(data[selected_date].values())
