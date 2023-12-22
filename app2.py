@@ -82,6 +82,12 @@ selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()
 
 
 if selected_date in data:
+    # data[selected_date]가 리스트인 경우, 각 요소에 대해 반복
+    for golfer in data[selected_date]:
+        st.write(golfer)  # 각 골퍼의 정보 출력
+        
+
+if selected_date in data:
     st.write("데이터 타입:", type(data[selected_date]))
     st.write("데이터 내용:", data[selected_date])
 
