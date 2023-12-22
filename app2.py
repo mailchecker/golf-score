@@ -83,21 +83,26 @@ date = st.date_input("날짜")
 # 저장 버튼
 submit_button = st.button('저장')
 
-# 데이터 저장 버튼 눌렀을 때의 처리
+# 저장 버튼 클릭시 데이터 처리
 if submit_button:
     # JSON 파일 읽기
     data = read_json("golfers_data.json")
 
-    # 현재 날짜의 데이터 업데이트 또는 추가
+    # 날짜 문자열 포맷팅
     date_str = date.strftime("%Y-%m-%d")
+
+    # 해당 날짜에 데이터가 없으면 새로운 리스트 생성, 있으면 기존 데이터에 추가
     if date_str not in data:
-        data[date_str] = {}
+        data[date_str] = []
+
+    # 입력된 골퍼 정보 추가
     for golfer in golfers_data:
-        data[date_str][golfer['name']] = golfer  # 이름을 키로 사용
+        if golfer['name']:  # 골퍼 이름이 비어있지 않은 경우에만 추가
+            data[date_str].append(golfer)
 
     # JSON 파일 쓰기
     write_json("golfers_data.json", data)
-
+    st.success("골퍼 정보가 저장되었습니다.")
 
 
 # 날짜별 데이터 조회 및 처리
@@ -107,7 +112,7 @@ if selected_date:
     if selected_date in data and data[selected_date]:
         selected_data = list(data[selected_date].values())
         df = pd.DataFrame(selected_data)
-        df = df.sort_values(by='result')
+        df = df.sort_values(by='result') if not df.empty else df
         st.table(df)
 
         # 골퍼 삭제 기능
