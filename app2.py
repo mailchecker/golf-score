@@ -106,12 +106,19 @@ if submit_button:
 
 
 # 날짜별 데이터 조회 및 처리
-selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
+#selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 
-#st.write('-----')
-#st.write(data)
-#st.write(data[selected_date])
-#st.write('-----')
+# 오늘 날짜 문자열 포맷팅
+today_str = datetime.now().strftime("%Y-%m-%d")
+
+# 날짜 선택 목록 생성
+date_options = list(data.keys())
+
+# 오늘 날짜의 인덱스 찾기
+default_index = date_options.index(today_str) if today_str in date_options else 0
+
+# 날짜 선택 위젯에 기본값으로 오늘 날짜 설정
+selected_date = st.selectbox("조회할 날짜 선택", options=date_options, index=default_index)
 
 #if selected_date in data:
 #    st.write("데이터 타입:", type(data[selected_date]))
