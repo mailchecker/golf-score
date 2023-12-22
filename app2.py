@@ -2,20 +2,39 @@ import streamlit as st
 import json
 import pandas as pd
 from datetime import datetime
+import os
+
+
+
+
 
 # JSON 파일 읽기 함수
 def read_json(filename):
     try:
-        with open(filename, "r") as file:
+        with open(filename, "r", encoding='utf-8') as file:
             return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        st.error(f"파일을 읽는 중 오류 발생: {e}")
         return {}
 
 # JSON 파일 쓰기 함수
 def write_json(filename, data):
-    with open(filename, "w") as file:
-        json.dump(data, file, indent=4)
+    try:
+        with open(filename, "w", encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
+    except IOError as e:
+        st.error(f"파일을 쓰는 중 오류 발생: {e}")
 
+# JSON 파일 삭제 버튼
+if st.button('JSON 파일 삭제'):
+    try:
+        os.remove("golfers_data.json")
+        st.success("JSON 파일이 삭제되었습니다.")
+    except FileNotFoundError:
+        st.error("파일이 존재하지 않아 삭제할 수 없습니다.")
+    except Exception as e:
+        st.error(f"파일 삭제 중 오류 발생: {e}")
+        
 # 애플리케이션 헤더
 st.title('스코어 관리 시스템')
 
