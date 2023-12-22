@@ -4,10 +4,6 @@ import pandas as pd
 from datetime import datetime
 import os
 
-
-
-
-
 # JSON 파일 읽기 함수
 def read_json(filename):
     try:
@@ -26,20 +22,27 @@ def write_json(filename, data):
         st.error(f"파일을 쓰는 중 오류 발생: {e}")
 
 # JSON 파일 삭제 버튼
-if st.button('JSON 파일 삭제'):
+def delete_json(filename):
     try:
-        os.remove("golfers_data.json")
+        os.remove(filename)
         st.success("JSON 파일이 삭제되었습니다.")
     except FileNotFoundError:
         st.error("파일이 존재하지 않아 삭제할 수 없습니다.")
     except Exception as e:
         st.error(f"파일 삭제 중 오류 발생: {e}")
-        
+
+
 # 애플리케이션 헤더
 st.title('스코어 관리 시스템')
 
 # 데이터 파일 로드 (혹은 초기화)
-data = read_json("golfers_data1.json")
+data = read_json("golfers_data.json")
+
+# 데이터 파일 삭제 (혹은 초기화)
+if st.button('JSON 파일 삭제'):
+    delete_json("golfers_data.json")
+
+
 
 # 골퍼 수 선택
 number_of_golfers = st.selectbox('골퍼 수 선택', range(1, 11))
@@ -83,7 +86,7 @@ submit_button = st.button('저장')
 # 데이터 저장 버튼 눌렀을 때의 처리
 if submit_button:
     # JSON 파일 읽기
-    data = read_json("golfers_data1.json")
+    data = read_json("golfers_data.json")
 
     # 현재 날짜의 데이터 업데이트 또는 추가
     date_str = date.strftime("%Y-%m-%d")
@@ -93,7 +96,7 @@ if submit_button:
         data[date_str][golfer['name']] = golfer  # 이름을 키로 사용
 
     # JSON 파일 쓰기
-    write_json("golfers_data1.json", data)
+    write_json("golfers_data.json", data)
 
 
 # 날짜별 데이터 조회
@@ -147,7 +150,7 @@ if selected_date:
         # 선택된 골퍼 이름에 해당하는 데이터를 삭제
         df = df[df['name'] != delete_golfer_name]
         data[selected_date] = df.to_dict('records')  # 변경된 데이터를 JSON으로 다시 저장
-        write_json("golfers_data1.json", data)
+        write_json("golfers_data.json", data)
         st.experimental_rerun()
 
 # 날짜별 데이터 조회
