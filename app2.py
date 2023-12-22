@@ -140,7 +140,7 @@ if selected_date in data:
 
 
         # 골퍼 삭제 기능
-        golfer_names = df['name'].tolist()
+        golfer_names = df['name']
         delete_golfer_name = st.selectbox("삭제할 골퍼 선택", options=golfer_names)
         if st.button("골퍼 삭제"):
             df = df[df['name'] != delete_golfer_name]
