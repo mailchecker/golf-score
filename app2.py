@@ -79,7 +79,6 @@ if submit_button:
 
 # 날짜별 데이터 조회
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
-if selected_date:
 
 
 if selected_date in data:
@@ -91,8 +90,10 @@ if selected_date in data:
         st.write(values)
     except AttributeError as e:
         st.error(f"오류 발생: {e}")
-        
 
+
+
+if selected_date:
     
     st.write(selected_date)
     st.write("-------data------------")
