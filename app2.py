@@ -99,69 +99,35 @@ if submit_button:
     write_json("golfers_data.json", data)
 
 
-# 날짜별 데이터 조회
+
+# 날짜별 데이터 조회 및 처리
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 
-
-if selected_date in data:
-    # data[selected_date]가 리스트인 경우, 각 요소에 대해 반복
-    for golfer in data[selected_date]:
-        st.write(golfer)  # 각 골퍼의 정보 출력
-        
-
-if selected_date in data:
-    st.write("데이터 타입:", type(data[selected_date]))
-    st.write("데이터 내용:", data[selected_date])
-
-    try:
-        values = data[selected_date].values()
-        st.write(values)
-    except AttributeError as e:
-        st.error(f"오류 발생: {e}")
-
-
-
 if selected_date:
-    
-    st.write(selected_date)
-    st.write("-------data------------")
-    st.write(data)
-    st.write("-------data.values()------------")    
-    st.write(data.values())
-    st.write("-------data[selected_date]------------")    
-    st.write(data[selected_date])
-    st.write("-------data[selected_date].values(------------")
-    st.write(data[selected_date].values())
-    st.write("-------------------")
-    selected_data = list(data[selected_date].values())
+    if selected_date in data and data[selected_date]:
+        selected_data = list(data[selected_date].values())
+        df = pd.DataFrame(selected_data)
+        df = df.sort_values(by='result')
+        st.table(df)
 
-    # 데이터를 DataFrame으로 변환
-    df = pd.DataFrame(selected_data)
+        # 골퍼 삭제 기능
+        golfer_names = df['name'].tolist()
+        delete_golfer_name = st.selectbox("삭제할 골퍼 선택", options=golfer_names)
+        if st.button("골퍼 삭제"):
+            df = df[df['name'] != delete_golfer_name]
+            data[selected_date] = df.to_dict('records')
+            write_json("golfers_data.json", data)
+            st.experimental_rerun()
+    else:
+        st.write("선택된 날짜에 골퍼 정보가 없습니다.")
+        # 새 데이터 추가 로직
+        if st.button("새 골퍼 정보 추가"):
+            data[selected_date] = golfers_data
+            write_json("golfers_data.json", data)
+            st.experimental_rerun()
+            
 
-    # 최종 결과에 따라 정렬
-    df = df.sort_values(by='result')
-    # 테이블 형태로 표시
-    st.table(df)
 
-    # 골퍼 삭제 기능
-    golfer_names = df['name'].tolist()  # 골퍼 이름 목록
-    delete_golfer_name = st.selectbox("삭제할 골퍼 선택", options=golfer_names)
-    if st.button("골퍼 삭제"):
-        # 선택된 골퍼 이름에 해당하는 데이터를 삭제
-        df = df[df['name'] != delete_golfer_name]
-        data[selected_date] = df.to_dict('records')  # 변경된 데이터를 JSON으로 다시 저장
-        write_json("golfers_data.json", data)
-        st.experimental_rerun()
 
-# 날짜별 데이터 조회
-#selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
-#if selected_date:
-    #selected_data = data[selected_date]
-    # 데이터를 최종 결과에 따라 정렬
-    # sorted_data = sorted(selected_data, key=lambda x: x['result'])
-    # 표시
-    # for golfer in sorted_data:
-    # st.write(golfer)
-    #st.write(selected_data)
 
 
