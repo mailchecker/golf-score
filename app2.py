@@ -116,6 +116,11 @@ if submit_button:
 # 날짜별 데이터 조회 및 처리
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 
+st.write('-----')
+st.write(data)
+st.write(data[selected_date])
+st.write('-----')
+
 if selected_date:
     if selected_date in data and data[selected_date]:
         selected_data = list(data[selected_date].values())
