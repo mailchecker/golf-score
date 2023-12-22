@@ -83,17 +83,22 @@ if submit_button:
     # 날짜 문자열 포맷팅
     date_str = date.strftime("%Y-%m-%d")
 
-    # 해당 날짜에 데이터가 없으면 새로운 리스트 생성, 있으면 기존 데이터에 추가
+    # 해당 날짜에 데이터가 없으면 새로운 리스트 생성
     if date_str not in data:
         data[date_str] = []
 
-    # 입력된 골퍼 정보 추가
-    st.write('------golfers_data-----')
-    st.write(golfers_data)
-    
-    for golfer in golfers_data:
-        if golfer['name']:  # 골퍼 이름이 비어있지 않은 경우에만 추가
-            data[date_str].append(golfer)
+    # 입력된 골퍼 정보 업데이트 또는 추가
+    for golfer_input in golfers_data:
+        found = False
+        for golfer in data[date_str]:
+            if golfer['name'] == golfer_input['name']:
+                # 동일한 이름의 골퍼 정보를 업데이트
+                golfer.update(golfer_input)
+                found = True
+                break
+        if not found and golfer_input['name']:
+            # 새 골퍼 정보 추가
+            data[date_str].append(golfer_input)
 
     # JSON 파일 쓰기
     write_json("golfers_data.json", data)
