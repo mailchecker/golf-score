@@ -81,6 +81,19 @@ if submit_button:
 selected_date = st.selectbox("조회할 날짜 선택", options=list(data.keys()))
 if selected_date:
 
+
+if selected_date in data:
+    st.write("데이터 타입:", type(data[selected_date]))
+    st.write("데이터 내용:", data[selected_date])
+
+    try:
+        values = data[selected_date].values()
+        st.write(values)
+    except AttributeError as e:
+        st.error(f"오류 발생: {e}")
+        
+
+    
     st.write(selected_date)
     st.write("-------data------------")
     st.write(data)
