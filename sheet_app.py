@@ -1,8 +1,13 @@
-import streamlit as st
+# streamlit_app.py
 
+import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+# Create a connection object.
+conn = st.connection("gsheets", type=GSheetsConnection)
 
-df = conn.read(spreadsheet=url, usecols=[0, 1])
-st.dataframe(df)
+df = conn.read()
+
+# Print results.
+for row in df.itertuples():
+    st.write(f"{row.장소} has a :{row.일자}:")
