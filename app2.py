@@ -33,7 +33,7 @@ def delete_json(filename):
 
 
 # 애플리케이션 헤더
-st.title('스코어 관리 시스템')
+st.title('골프 스코어 관리 시스템')
 
 # 데이터 파일 로드 (혹은 초기화)
 data = read_json("golfers_data.json")
