@@ -133,6 +133,10 @@ selected_date = st.selectbox("조회할 날짜 선택", options=date_options, in
 if selected_date in data:
     selected_data = data[selected_date]  # '.values()' 호출 제거
     df = pd.DataFrame(selected_data)
+
+    df['handicap'] = df['handicap'].round(1)
+    df['result'] = df['result'].round(1)
+    
     df = df.sort_values(by='result') if not df.empty else df
     st.table(df)
 
