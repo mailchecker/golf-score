@@ -59,15 +59,16 @@ for i in range(number_of_golfers):
     with col1:
         name = st.text_input(f'골퍼 {i+1} 이름', key=f'name_{i}')
     with col2:
-        stroke = st.number_input(f'스트로크', min_value=-100, value=0, key=f'stroke_{i}', on_change=update_result, args=(i,))
+        stroke = st.number_input('스트로크', min_value=-100, max_value=100, value=0, step=1, format="%i", key=f'stroke_{i}', on_change=update_result, args=(i,))
     with col3:
-        handicap = st.number_input(f'핸디캡', min_value=-100, value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
+        # 핸디캡에 소수점 입력을 위한 설정 변경
+        handicap = st.number_input('핸디캡', min_value=-100.0, max_value=100.0, value=0.0, step=0.1, format="%.1f", key=f'handicap_{i}', on_change=update_result, args=(i,))
     with col4:
-        # '최종결과' 입력칸을 숫자 형식으로 변경
         result = st.session_state.get(f'result_{i}', 0)
-        st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True, min_value=-200)
+        st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True)
 
     golfers_data.append({'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
+
 
 # 날짜 입력 추가
 date = st.date_input("날짜")
