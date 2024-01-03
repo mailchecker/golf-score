@@ -61,7 +61,7 @@ for i in range(number_of_golfers):
     with col2:
         stroke = st.number_input(f'스트로크', min_value=-100, value=0, key=f'stroke_{i}', on_change=update_result, args=(i,))
     with col3:
-        handicap = st.number_input(f'핸디캡', min_value=-100, value=0, key=f'handicap_{i}', on_change=update_result, args=(i,))
+        handicap = st.number_input(f'핸디캡', min_value=-100, value=0, key=f'handicap_{i}', format="%.1f", on_change=update_result, args=(i,))
     with col4:
         # '최종결과' 입력칸을 숫자 형식으로 변경
         result = st.session_state.get(f'result_{i}', 0)
