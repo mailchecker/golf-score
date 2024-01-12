@@ -60,7 +60,9 @@ if submit_button:
 # 날짜별 데이터 조회
 selected_date = st.selectbox("조회할 날짜 선택", options=[datetime.now().strftime("%Y-%m-%d")])
 
+st.write("-----")
 st.write(read_data())
+st.write("-----")
 
 # 조회된 데이터 표시
 if selected_date:
