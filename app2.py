@@ -6,7 +6,7 @@ import os
 
 
 
-st.write("DB username:", st.secrets["DB_USERNAME"])
+st.write("DB username:", st.secrets["db_username"])
 st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
 st.write("some_section:", st.secrets["some_section"]["some_key"])
 
