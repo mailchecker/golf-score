@@ -6,6 +6,22 @@ from datetime import datetime
 # Supabase 연결 초기화
 conn = st.connection("supabase", type=SupabaseConnection)
 
+# Perform query.
+#rows = conn.query("*", table="mytable", ttl="10m").execute()
+
+# Print results.
+rows = test_read_data()
+for row in rows.data:
+    st.write(f"{row['name']} has a :{row['pet']}:")
+
+def test_read_data():
+    query = conn.query("SELECT * FROM mytable")
+    rows = conn.execute(query)
+    return rows
+    
+
+
+
 # 데이터베이스에서 데이터 읽기
 def read_data():
     query = conn.query("SELECT * FROM golf_scores")
