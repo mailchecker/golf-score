@@ -5,6 +5,12 @@ from datetime import datetime
 import os
 
 
+
+st.write("DB username:", st.secrets["DB_USERNAME"])
+st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
+st.write("some_section:", st.secrets["some_section"]["some_key"])
+
+
 # JSON 파일 읽기 함수
 def read_json(filename):
     try:
