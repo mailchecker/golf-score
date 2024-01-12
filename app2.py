@@ -15,8 +15,9 @@ def test_read_data():
     return rows
     
 # Print results.
-test_read_data()
-
+rows = test_read_data()
+for row in rows.data:
+    st.write(f"{row['name']} has a :{row['pet']}:")
 
 
 # 데이터베이스에서 데이터 읽기
