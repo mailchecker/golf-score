@@ -11,8 +11,7 @@ conn = st.connection("supabase", type=SupabaseConnection)
 
 
 def test_read_data():
-    query = conn.query("SELECT * FROM mytable")
-    rows = conn.execute(query)
+    rows = conn.query("*", table="mytable", ttl="10m").execute()
     return rows
     
 # Print results.
