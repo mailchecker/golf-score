@@ -8,18 +8,18 @@ conn = st.connection("supabase", type=SupabaseConnection)
 
 # 데이터베이스에서 데이터 읽기
 def read_data():
-    query = conn.query("SELECT * FROM golfers_data")
+    query = conn.query("SELECT * FROM golf_scores")
     data = conn.execute(query)
     return data
 
 # 데이터베이스에 데이터 쓰기
 def write_data(golfer_data):
-    query = conn.query("INSERT INTO golfers_data", golfer_data)
+    query = conn.query("INSERT INTO golf_scores", golfer_data)
     conn.execute(query)
 
 # 데이터베이스에서 데이터 삭제
 def delete_data(date, name):
-    query = conn.query("DELETE FROM golfers_data WHERE date = %s AND name = %s", (date, name))
+    query = conn.query("DELETE FROM golf_scores WHERE date = %s AND name = %s", (date, name))
     conn.execute(query)
 
 # 애플리케이션 헤더
