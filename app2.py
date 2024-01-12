@@ -8,7 +8,10 @@ import os
 st.write("DB username:", st.secrets["DB_USERNAME"])
 st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
 st.write("some_section:", st.secrets["some_section"]["some_key"])
-
+st.write(
+    "Has environment variables been set:",
+    os.environ["db_username"] == st.secrets["db_username"],
+)
 
 
 # JSON 파일 읽기 함수
