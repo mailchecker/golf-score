@@ -10,7 +10,7 @@ st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
 st.write("some_section:", st.secrets["some_section"]["some_key"])
 st.write(
     "Has environment variables been set:",
-    os.environ["db_username"] == st.secrets["db_username"],
+    os.environ["DB_USERNAME"] == st.secrets["DB_USERNAME"],
 )
 
 
