@@ -16,7 +16,7 @@ def test_read_data():
     return rows
     
 # Print results.
-test_read_data
+test_read_data()
 
 
 
