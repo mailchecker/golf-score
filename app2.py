@@ -19,6 +19,13 @@ for row in rows.data:
     st.write(f"{row['name']} has a :{row['pet']}:")
 
 
+# Perform query.
+rows = conn.query("*", table="golf_scores", ttl="10m").execute()
+
+# Print results.
+for row in rows.data:
+    st.write(f"{row['name']}, {row['date']}:")
+
 
 
 
