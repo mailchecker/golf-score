@@ -3,38 +3,20 @@ import json
 import pandas as pd
 from datetime import datetime
 import os
-from supabase import create_client, Client
+
+
+# streamlit_app.py
 from st_supabase_connection import SupabaseConnection
 
-# Everything is accessible via the st.secrets dict:
-st.write("DB username:", st.secrets["db_username"])
-st.write("DB password:", st.secrets["db_password"])
-st.write("My cool secrets:", st.secrets["my_cool_secrets"]["things_i_like"])
-
-# And the root-level secrets are also accessible as environment variables:
-st.write(
-    "Has environment variables been set:",
-    os.environ["db_username"] == st.secrets["db_username"],
-)
-
-
 # Initialize connection.
-# Uses st.cache_resource to only run once.
-@st.cache_resource
-def init_connection():
-    url = st.secrets["supabase"]["supabaseUrl"]
-    key = st.secrets["supabase"]["supabaseKey"]
-    return create_client(url, key)
-
-supabase = init_connection()
+conn = st.connection("supabase",type=SupabaseConnection)
 
 # Perform query.
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_data(ttl=600)
-def run_query():
-    return supabase.table("golf_scores").select("*").execute()
+rows = conn.query("*", table="mytable", ttl="10m").execute()
 
-rows = run_query()
+# Print results.
+for row in rows.data:
+    st.write(f"{row['name']} has a :{row['pet']}:")
 
 
 
