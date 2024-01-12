@@ -34,8 +34,8 @@ supabase = init_connection()
 def run_query():
     return supabase.table("golf_scores").select("*").execute()
 
-#rows = run_query()
-run_query()
+rows = run_query()
+
 
 
 
