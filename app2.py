@@ -9,14 +9,14 @@ conn = st.connection("supabase", type=SupabaseConnection)
 # Perform query.
 #rows = conn.query("*", table="mytable", ttl="10m").execute()
 
-# Print results.
-test_read_data()
 
 def test_read_data():
     query = conn.query("SELECT * FROM mytable")
     rows = conn.execute(query)
     return rows
     
+# Print results.
+test_read_data
 
 
 
