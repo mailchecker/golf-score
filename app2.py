@@ -8,7 +8,6 @@ import os
 st.write("DB username:", st.secrets["DB_USERNAME"])
 st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
 st.write("some_section:", st.secrets["some_section"]["some_key"])
-st.write(os.environ)
 st.write(
     "Has environment variables been set:",
     os.environ["DB_USERNAME"] == st.secrets["DB_USERNAME"],
