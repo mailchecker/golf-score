@@ -8,7 +8,7 @@ import os
 st.write("DB username:", st.secrets["DB_USERNAME"])
 st.write("DB_TOKEN:", st.secrets["DB_TOKEN"])
 st.write("some_section:", st.secrets["some_section"]["some_key"])
-st.write("supabase:", st.secrets["supabase"]["supabaseUrl"])
+st.write("supabase:", st.secrets["supabase_section"]["supabaseUrl"])
 
 
 # JSON 파일 읽기 함수
