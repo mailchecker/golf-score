@@ -24,10 +24,7 @@ rows = conn.query("*", table="golf_scores", ttl="10m").execute()
 
 # Print results.
 for row in rows.data:
-    st.write(f"{row['name']}, row['stroke'], row['handicap'], row['result'], {row['date']}:")
-
-
-
+    st.write(f"{row['name']}, {row['stroke']}, {row['handicap']}, {row['result']}, {row['date']}:")
 
 
 
