@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 import os
 from supabase import create_client, Client
-
+from st_supabase_connection import SupabaseConnection
 
 # Everything is accessible via the st.secrets dict:
 st.write("DB username:", st.secrets["db_username"])
@@ -30,11 +30,11 @@ supabase = init_connection()
 
 # Perform query.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_data(ttl=600)
-def run_query():
-    return supabase.table("golf_scores").select("*").execute()
+#@st.cache_data(ttl=600)
+#def run_query():
+#    return supabase.table("golf_scores").select("*").execute()
 
-rows = run_query()
+#rows = run_query()
 
 
 
