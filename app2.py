@@ -22,19 +22,29 @@ for row in rows.data:
 
 # 데이터베이스에서 데이터 읽기
 def read_data():
-    query = conn.query("SELECT * FROM golf_scores")
-    data = conn.execute(query)
-    return data
+    try:
+        query = conn.query("*", table="golf_scores", ttl="10m")
+        data = query.execute()
+        return data
+    except Exception as e:
+        st.error(f"데이터 불러오기 오류: {e}")
+        return []
 
 # 데이터베이스에 데이터 쓰기
 def write_data(golfer_data):
-    query = conn.query("INSERT INTO golf_scores", golfer_data)
-    conn.execute(query)
+    try:
+        query = conn.query("INSERT INTO golf_scores", golfer_data)
+        conn.execute(query)
+    except Exception as e:
+        st.error(f"데이터 쓰기 오류: {e}")
 
 # 데이터베이스에서 데이터 삭제
 def delete_data(date, name):
-    query = conn.query("DELETE FROM golf_scores WHERE date = %s AND name = %s", (date, name))
-    conn.execute(query)
+    try:
+        query = conn.query("DELETE FROM golf_scores WHERE date = %s AND name = %s", (date, name))
+        conn.execute(query)
+    except Exception as e:
+        st.error(f"데이터 삭제 오류: {e}")
 
 # 애플리케이션 헤더
 st.title('골프 스코어 관리 시스템')
