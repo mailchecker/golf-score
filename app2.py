@@ -11,13 +11,13 @@ conn = st.connection("supabase", type=SupabaseConnection)
 
 
 def test_read_data():
-    rows = conn.query("*", table="mytable", ttl="10m").execute()
+    rows = conn.query("*", table="golf_scores", ttl="10m").execute()
     return rows
     
 # Print results.
 rows = test_read_data()
 for row in rows.data:
-    st.write(f"{row['name']} has a :{row['pet']}:")
+    st.write(f"{row['name']} has a :{row['result']}:")
 
 
 # 데이터베이스에서 데이터 읽기
