@@ -27,7 +27,7 @@ def read_data(selected_date=None):
         if selected_date:
             selected_date_str = selected_date.strftime("%Y-%m-%d")
             query = conn.query("*", count="None", table='golf_scores', ttl='0').eq("date",selected_date_str).order("name",desc=True).execute()
-        else
+        else:
             query = conn.query("*", count="None", table='golf_scores', ttl='0').order("name",desc=True).execute()
             
         data = query.execute()
