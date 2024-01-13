@@ -28,9 +28,6 @@ def read_data1(selected_date=None):
             selected_date_str = selected_date.strftime("%Y-%m-%d")
             # 특정 날짜에 해당하는 데이터만 필터링
             query = query.eq("date", selected_date_str)
-
-            st.write('----------------->>>>>>>>>>>>>>>>')
-
         data = query.execute()
         return data
     except Exception as e:
@@ -116,7 +113,9 @@ st.write(read_data1(selected_date));
 # 조회된 데이터 표시
 if selected_date:
     displayed_data = read_data(selected_date)
-    st.write(displayed_data)
+    st.write(displayed_data.data)
+    st.write(displayed_data.count)
+    
     if displayed_data.data:
         df = pd.DataFrame(displayed_data.data)
         df_sorted = df.sort_values(by='result')
