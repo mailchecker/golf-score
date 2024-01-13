@@ -21,10 +21,13 @@ for row in rows.data:
 
 
 # 데이터베이스에서 데이터 읽기
-def read_data():
+def read_data(selected_date=None):
     try:
         query = conn.query("*", table="golf_scores", ttl="10m")
         data = query.execute()
+        # 선택된 날짜에 해당하는 데이터만 필터링
+        if selected_date:
+            data = [d for d in data if d['date'] == selected_date]
         return data
     except Exception as e:
         st.error(f"데이터 불러오기 오류: {e}")
@@ -87,15 +90,14 @@ st.write(read_data())
 st.write("-----$$$$$$$$$$$$$")
 
 
-
-# 날짜별 데이터 조회
-selected_date = st.selectbox("조회할 날짜 선택", options=[datetime.now().strftime("%Y-%m-%d")])
+# 날짜별 데이터 조회 - 기본값으로 오늘 날짜 사용
+today = datetime.now().date()
+selected_date = st.date_input("조회할 날짜 선택", value=today)
 
 # 조회된 데이터 표시
-if selected_date:
-    displayed_data = [golfer for golfer in read_data() if golfer['date'] == selected_date]
-    if displayed_data:
-        df = pd.DataFrame(displayed_data)
-        st.table(df.sort_values(by='result'))
-    else:
-        st.write("선택된 날짜에 골퍼 정보가 없습니다.")
+displayed_data = read_data(selected_date)
+if displayed_data:
+    df = pd.DataFrame(displayed_data)
+    st.table(df.sort_values(by='result'))
+else:
+    st.write("선택된 날짜에 골퍼 정보가 없습니다.")
