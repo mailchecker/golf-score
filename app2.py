@@ -37,7 +37,6 @@ def read_data1(selected_date=None):
         st.error(f"데이터 불러오기 오류: {e}")
         return []
 
-st.write(read_data1("2024-01-12"));
 
 # 데이터베이스에서 데이터 읽기
 def read_data(selected_date=None):
@@ -110,6 +109,9 @@ if submit_button:
 # 날짜별 데이터 조회 - 기본값으로 오늘 날짜 사용
 today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
+
+
+st.write(read_data1(selected_date);
 
 # 조회된 데이터 표시
 if selected_date:
