@@ -29,7 +29,7 @@ def read_data(selected_date=None):
             query = conn.query("*", count="None", table='golf_scores', ttl='0').eq("date",selected_date_str).order("name",desc=True).execute()
         else
             query = conn.query("*", count="None", table='golf_scores', ttl='0').order("name",desc=True).execute()
-
+            
         data = query.execute()
         return data
     except Exception as e:
