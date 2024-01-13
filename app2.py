@@ -53,10 +53,6 @@ def read_data_test(selected_date=None):
 def write_data(golfer_data):
     try:
         st.write(golfer_data)
-        # 날짜 객체를 ISO 포맷 문자열로 변환
-        if 'date' in golfer_data and isinstance(golfer_data['date'], datetime.date):
-            golfer_data['date'] = golfer_data['date'].isoformat()
-
         response = conn.table("golf_scores").insert(golfer_data, count="None").execute()
         if response.error:
             st.error(f"데이터 삽입 오류: {response.error}")
