@@ -25,6 +25,9 @@ def read_data(selected_date=None):
     try:
         query = conn.query("*", table="golf_scores", ttl="10m")
         data = query.execute()
+
+        st.write(data)
+        
         return data
     except Exception as e:
         st.error(f"데이터 불러오기 오류: {e}")
