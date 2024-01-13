@@ -108,11 +108,11 @@ today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
 
 
-st.write(read_data1(selected_date));
+st.write(read_data(selected_date));
 
 # 조회된 데이터 표시
 if selected_date:
-    displayed_data = read_data(selected_date)
+    displayed_data = read_data1(selected_date)
     st.write(displayed_data.data)
     st.write(displayed_data.count)
     
