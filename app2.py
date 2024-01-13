@@ -50,13 +50,17 @@ def read_data_test(selected_date=None):
         return []
 
 
-# 데이터베이스에 데이터 쓰기
 def write_data(golfer_data):
     try:
-        query = conn.query("INSERT INTO golf_scores", golfer_data)
-        conn.execute(query)
+        response = st_supabase.table("golf_scores").insert([golfer_data], count="None").execute()
+        if response.error:
+            st.error(f"데이터 삽입 오류: {response.error}")
+        else:
+            st.success("골퍼 정보가 저장되었습니다.")
     except Exception as e:
         st.error(f"데이터 쓰기 오류: {e}")
+      
+
 
 # 데이터베이스에서 데이터 삭제
 def delete_data(date, name):
