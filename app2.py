@@ -9,7 +9,6 @@ conn = st.connection("supabase", type=SupabaseConnection)
 # Perform query.
 #rows = conn.query("*", table="mytable", ttl="10m").execute()
 
-
 def test_read_data():
     rows = conn.query("*", table="golf_scores", ttl="10m").execute()
     return rows
@@ -19,10 +18,9 @@ rows = test_read_data()
 for row in rows.data:
     st.write(f"{row['name']} has a :{row['result']}:")
 
-
-def read_data1(selected_date=None):
+def read_data(selected_date=None):
     try:
-        query = conn.query("*", table="golf_scores", ttl="10m")
+        query = conn.query("*", table="golf_scores", ttl="0")
         if selected_date:
             # selected_date를 문자열 형식으로 변환
             selected_date_str = selected_date.strftime("%Y-%m-%d")
@@ -36,9 +34,8 @@ def read_data1(selected_date=None):
         st.error(f"데이터 불러오기 오류: {e}")
         return []
 
-
 # 데이터베이스에서 데이터 읽기
-def read_data(selected_date=None):
+def read_data_test(selected_date=None):
     try:
 
         if selected_date:
@@ -109,15 +106,16 @@ if submit_button:
 today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
 
-st.write('--------------')
-date_result = read_data(selected_date)
-st.write(date_result)
-st.table(pd.DataFrame(date_result.data))
-st.write('--------------')
+
+#st.write('--------------')
+#date_result = read_data_test(selected_date)
+#st.write(date_result)
+#st.table(pd.DataFrame(date_result.data))
+#st.write('--------------')
 
 # 조회된 데이터 표시
 if selected_date:
-    displayed_data = read_data1(selected_date)
+    displayed_data = read_data(selected_date)
     if displayed_data.data:
         df = pd.DataFrame(displayed_data.data)
         df_sorted = df.sort_values(by='result')
