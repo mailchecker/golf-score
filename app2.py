@@ -26,9 +26,9 @@ def read_data(selected_date=None):
 
         if selected_date:
             selected_date_str = selected_date.strftime("%Y-%m-%d")
-            query = conn.query("*", count="None", table='golf_scores', ttl='0').eq("date",selected_date_str).order("name",desc=True).execute()
+            query = conn.query("*", count="None", table='golf_scores', ttl='0').eq("date",selected_date_str).order("result",desc=True).execute()
         else:
-            query = conn.query("*", count="None", table='golf_scores', ttl='0').order("name",desc=True).execute()
+            query = conn.query("*", count="None", table='golf_scores', ttl='0').order("result",desc=True).execute()
 
         return data
     except Exception as e:
