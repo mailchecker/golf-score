@@ -54,8 +54,8 @@ def write_data(golfer_data):
     try:
         st.write(golfer_data)
         response = conn.table("golf_scores").insert([golfer_data], count="None").execute()
-        if response.error:
-            st.error(f"데이터 삽입 오류: {response.error}")
+        if response.code:
+            st.error(f"데이터 삽입 오류: {response.code}")
         else:
             st.success("골퍼 정보가 저장되었습니다.")
     except Exception as e:
