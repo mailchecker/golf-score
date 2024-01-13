@@ -34,7 +34,7 @@ def read_data1(selected_date=None):
         st.error(f"데이터 불러오기 오류: {e}")
         return []
 
-st.write(read_data1('2024-01-12'));
+st.write(read_data1("2024-01-12"));
 
 # 데이터베이스에서 데이터 읽기
 def read_data(selected_date=None):
