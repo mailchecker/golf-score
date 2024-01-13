@@ -93,7 +93,7 @@ today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
 
 # 조회된 데이터 표시
-if selected_date:
+if selected_date.data:
     displayed_data = read_data(selected_date)
     st.write(displayed_data.data)
     if displayed_data:
