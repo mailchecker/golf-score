@@ -30,7 +30,7 @@ def read_data(selected_date=None):
         else:
             query = conn.query("*", count="None", table='golf_scores', ttl='0').order("result",desc=True).execute()
 
-        return data
+        return query
     except Exception as e:
         st.error(f"데이터 불러오기 오류: {e}")
         return []
