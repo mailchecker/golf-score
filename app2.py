@@ -86,15 +86,9 @@ if submit_button:
     st.success("골퍼 정보가 저장되었습니다.")
 
 
-#st.write("$$$$$$$$$$$$$$$$-----")
-#st.write(read_data())
-#st.write("-----$$$$$$$$$$$$$")
-
-
 # 날짜별 데이터 조회 - 기본값으로 오늘 날짜 사용
 today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
-
 
 # 조회된 데이터 표시
 if selected_date:
@@ -102,16 +96,6 @@ if selected_date:
     st.write(displayed_data.data)
     if displayed_data:
         df = pd.DataFrame(displayed_data.data)
-
-        # 'result' 컬럼의 데이터 타입 확인 및 변환
-        if df['result'].dtype == 'O':  # 'O'는 객체(일반적으로 문자열)를 나타냄
-            df['result'] = pd.to_numeric(df['result'], errors='coerce')  # 문자열을 숫자로 변환
-
-        # 결측치 제거 또는 처리
-        df = df.dropna(subset=['result'])  # 'result' 컬럼의 결측치 제거
-        # 또는 다른 방식으로 결측치 처리
-
-        # 정렬 및 표시
         df_sorted = df.sort_values(by='result')
         st.table(df_sorted)
     else:
