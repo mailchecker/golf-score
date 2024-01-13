@@ -113,7 +113,7 @@ st.write('--------------')
 date_result = read_data1(selected_date)
 st.write(date_result.data)
 st.write(date_result.count)
-pd.DataFrame(date_result.data)
+pd.DataFrame(date_result)
 st.write('--------------')
 
 # 조회된 데이터 표시
