@@ -56,6 +56,7 @@ def write_data(golfer_data):
         if 'date' in golfer_data and isinstance(golfer_data['date'], datetime.date):
             golfer_data['date'] = golfer_data['date'].isoformat()
 
+        st.write([golfer_data])
         response = st_supabase.table("golf_scores").insert([golfer_data], count="None").execute()
         if response.error:
             st.error(f"데이터 삽입 오류: {response.error}")
