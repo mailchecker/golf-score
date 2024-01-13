@@ -110,7 +110,9 @@ today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
 
 st.write('--------------')
-st.write(read_data1(selected_date))
+date_result = read_data1(selected_date)
+st.write(date_result.data)
+st.write(date_result.count)
 st.write('--------------')
 
 # 조회된 데이터 표시
