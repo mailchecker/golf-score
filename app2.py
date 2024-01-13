@@ -82,9 +82,9 @@ for i in range(number_of_golfers):
     with col1:
         name = st.text_input(f'골퍼 {i+1} 이름', key=f'name_{i}')
     with col2:
-        stroke = st.number_input('스트로크', min_value=-100, max_value=100, key=f'stroke_{i}')
+        stroke = st.number_input('스트로크', value=72, min_value=-100, max_value=100, key=f'stroke_{i}')
     with col3:
-        handicap = st.number_input('핸디캡', min_value=-100.0, max_value=100.0, key=f'handicap_{i}')
+        handicap = st.number_input('핸디캡', value=0.0, min_value=-100.0, max_value=100.0, key=f'handicap_{i}')
     with col4:
         result = stroke - handicap
         st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True)
