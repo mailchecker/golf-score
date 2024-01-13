@@ -28,7 +28,7 @@ def read_data1(selected_date=None):
             selected_date_str = selected_date.strftime("%Y-%m-%d")
             # 특정 날짜에 해당하는 데이터만 필터링
             query = query.eq("date", selected_date_str)
-
+            
         query = query.order("result",desc=True)
         data = query.execute()
         return data
