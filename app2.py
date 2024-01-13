@@ -30,7 +30,7 @@ def read_data1(selected_date=None):
             query = query.eq("date", selected_date_str)
 
             st.write('----------------->>>>>>>>>>>>>>>>')
-            st.write(query)
+
         data = query.execute()
         return data
     except Exception as e:
