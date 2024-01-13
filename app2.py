@@ -20,6 +20,22 @@ for row in rows.data:
     st.write(f"{row['name']} has a :{row['result']}:")
 
 
+def read_data1(selected_date=None):
+    try:
+        query = conn.query("*", table="golf_scores", ttl="10m")
+        if selected_date:
+            # selected_date를 문자열 형식으로 변환
+            selected_date_str = selected_date.strftime("%Y-%m-%d")
+            # 특정 날짜에 해당하는 데이터만 필터링
+            query = query.eq("date", selected_date_str)
+        data = query.execute()
+        return data
+    except Exception as e:
+        st.error(f"데이터 불러오기 오류: {e}")
+        return []
+
+st.write(read_data1());
+
 # 데이터베이스에서 데이터 읽기
 def read_data(selected_date=None):
     try:
