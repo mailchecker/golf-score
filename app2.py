@@ -103,6 +103,6 @@ st.write(displayed_data)
 
 if displayed_data:
     df = pd.DataFrame(displayed_data)
-    #st.table(df.sort_values(by='result'))
+    st.table(df.sort_values(by='result'))
 else:
     st.write("선택된 날짜에 골퍼 정보가 없습니다.")
