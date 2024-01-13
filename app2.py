@@ -94,7 +94,7 @@ for i in range(number_of_golfers):
         result = stroke - handicap
         st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True)
 
-    golfers_data.append({'date': date, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
+    golfers_data.append({'date': '2024-01-12', 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
 # 저장 버튼
 submit_button = st.button('저장')
