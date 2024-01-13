@@ -53,7 +53,7 @@ def read_data_test(selected_date=None):
 def write_data(golfer_data):
     try:
         st.write(golfer_data)
-        response = conn.table("golf_scores").insert(golfer_data, count="None").execute()
+        response = conn.table("golf_scores").insert([golfer_data], count="None").execute()
         if response.error:
             st.error(f"데이터 삽입 오류: {response.error}")
         else:
