@@ -103,7 +103,6 @@ submit_button = st.button('저장')
 if submit_button:
     for golfer in golfers_data:
         if golfer['name']:  # 이름이 있는 골퍼만 저장
-            st.write(golfer)
             write_data(golfer)
     st.success("골퍼 정보가 저장되었습니다.")
 
