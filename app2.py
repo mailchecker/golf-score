@@ -101,7 +101,7 @@ if selected_date:
     displayed_data = read_data(selected_date)
     st.write(displayed_data.data)
     if displayed_data:
-        df = pd.DataFrame(displayed_data)
+        df = pd.DataFrame(displayed_data.data)
 
         # 'result' 컬럼의 데이터 타입 확인 및 변환
         if df['result'].dtype == 'O':  # 'O'는 객체(일반적으로 문자열)를 나타냄
