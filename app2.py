@@ -112,7 +112,7 @@ selected_date = st.date_input("조회할 날짜 선택", value=today)
 st.write('--------------')
 date_result = read_data1(selected_date)
 st.write(date_result)
-pd.DataFrame(date_result.data)
+st.table(pd.DataFrame(date_result.data))
 st.write('--------------')
 
 # 조회된 데이터 표시
