@@ -24,14 +24,6 @@ for row in rows.data:
 def read_data(selected_date=None):
     try:
         query = conn.query("*", table="golf_scores", ttl="10m")
-        st.write(query)
-        if selected_date:
-            # selected_date를 문자열 형식으로 변환
-            selected_date_str = selected_date.strftime("%Y-%m-%d")
-            # 특정 날짜에 해당하는 데이터만 필터링
-            query = query.eq("date", selected_date_str)
-            st.write(query)
-            
         data = query.execute()
         return data
     except Exception as e:
