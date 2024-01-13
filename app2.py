@@ -93,10 +93,10 @@ today = datetime.now().date()
 selected_date = st.date_input("조회할 날짜 선택", value=today)
 
 # 조회된 데이터 표시
-if selected_date.data:
+if selected_date:
     displayed_data = read_data(selected_date)
     st.write(displayed_data.data)
-    if displayed_data:
+    if displayed_data.data:
         df = pd.DataFrame(displayed_data.data)
         df_sorted = df.sort_values(by='result')
         st.table(df_sorted)
