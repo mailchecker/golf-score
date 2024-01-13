@@ -85,9 +85,9 @@ if submit_button:
     st.success("골퍼 정보가 저장되었습니다.")
 
 
-st.write("$$$$$$$$$$$$$$$$-----")
-st.write(read_data())
-st.write("-----$$$$$$$$$$$$$")
+#st.write("$$$$$$$$$$$$$$$$-----")
+#st.write(read_data())
+#st.write("-----$$$$$$$$$$$$$")
 
 
 # 날짜별 데이터 조회 - 기본값으로 오늘 날짜 사용
