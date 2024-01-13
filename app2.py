@@ -79,6 +79,7 @@ number_of_golfers = st.selectbox('골퍼 수 선택', range(1, 11))
 
 # 날짜 입력 추가
 date = st.date_input("날짜")
+date_str = date.isoformat()
 
 # 골퍼별 입력칸 배열
 golfers_data = []
@@ -94,7 +95,7 @@ for i in range(number_of_golfers):
         result = stroke - handicap
         st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True)
 
-    golfers_data.append({'date': '2024-01-12', 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
+    golfers_data.append({'date': date_str, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
 
 # 저장 버튼
 submit_button = st.button('저장')
