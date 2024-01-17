@@ -81,7 +81,7 @@ def delete_data(date, name):
         st.error(f"데이터 삭제 오류: {e}")
 
 # 애플리케이션 헤더
-st.title('스코어 관리 시스템')
+st.title('골프스코어 관리 시스템')
 
 # 한 줄에 두 개의 입력칸 배치
 col1, col2 = st.columns(2)
