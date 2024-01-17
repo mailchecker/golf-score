@@ -99,7 +99,9 @@ with col2:
 golfers_data = []
 
 for i in range(number_of_golfers):
-    col1, col2, col3, col4 = st.columns(4)
+
+    #col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         name = st.text_input(f'골퍼 {i + 1} 이름', key=f'name_{i}')
     with col2:
@@ -109,8 +111,12 @@ for i in range(number_of_golfers):
     with col4:
         result = stroke - handicap
         st.number_input('최종결과', value=result, key=f'result_{i}', disabled=True)
+    with col5:
+        # 승패 여부 선택 리스트 박스
+        is_winner = st.selectbox('승패 여부', [True, False], key=f'winner_{i}')
 
-    golfers_data.append({'date': date_str, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result})
+    golfers_data.append({'date': date_str, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result, 'iswinner': is_winner})
+
 
 # 저장 버튼
 submit_button = st.button('저장')
