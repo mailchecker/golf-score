@@ -100,7 +100,6 @@ golfers_data = []
 
 for i in range(number_of_golfers):
 
-    #col1, col2, col3, col4 = st.columns(4)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         name = st.text_input(f'골퍼 {i + 1} 이름', key=f'name_{i}')
