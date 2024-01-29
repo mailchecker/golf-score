@@ -37,6 +37,8 @@ def read_group_date():
 
     url2: str = st.secrets["SUPABASE_URL"]
     key2: str = st.secrets["SUPABASE_KEY"]
+    st.write(url2)
+    st.write(key2)
     supabase: Client = create_client(url2, key2)
     
     year = 2024
