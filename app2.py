@@ -35,7 +35,8 @@ def read_group_date():
     year = 2024
     query = (
         conn.table("golf_scores")
-        .select("date",count="exact")
+        .select("date",count(*), count="exact")
+        .group("date")
         .order("date")
     )
     
