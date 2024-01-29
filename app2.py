@@ -31,27 +31,6 @@ def read_data(selected_date=None):
         return []
 
 
-  
-
-def read_group_date():
-
-    url2: str = st.secrets["SUPABASE_URL"]
-    key2: str = st.secrets["SUPABASE_KEY"]
-    supabase: Client = create_client(url2, key2)
-    
-    year = 2024
-    query = (
-        supabase.table("golf_scores")
-        .select("date", count="exact")
-        .order("date")
-    )
-    
-    data = query.execute()
-    st.write(data)
-    
-read_group_date()
-
-
 # 데이터베이스에서 데이터 읽기
 def read_data_test(selected_date=None):
     try:
