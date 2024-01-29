@@ -43,7 +43,6 @@ def read_group_date():
     query = (
         supabase.table("golf_scores")
         .select("date, count(name)", count="exact")
-        .where(f"extract(year from date) = {year}")
         .group("date")
         .order("date")
     )
