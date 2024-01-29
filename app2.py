@@ -36,7 +36,6 @@ def read_group_date():
     query = (
         conn.table("golf_scores")
         .select("date, count(name)", count="exact")
-        .group("date")
         .order("date")
     )
     
