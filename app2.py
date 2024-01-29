@@ -49,7 +49,7 @@ def read_group_date(year):
         for row in data.data:
             print(f"Date: {row['date']}, Count: {row['count']}")
 
-read_group_date()
+read_group_date('2024')
 
 
 # 데이터베이스에서 데이터 읽기
