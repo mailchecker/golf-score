@@ -34,7 +34,7 @@ def read_data(selected_date=None):
 def read_group_date(year):
     year = 2024
     query = (
-        conn.table("attendance")
+        conn.table("golf_scores")
         .select("date, count(person_id)", count="exact")
         .where(f"extract(year from date) = {year}")
         .group("date")
