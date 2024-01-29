@@ -32,6 +32,7 @@ def read_data(selected_date=None):
 
 
 def read_group_date(year):
+    year = 2024
     query = (
         conn.table("attendance")
         .select("date, count(person_id)", count="exact")
@@ -41,7 +42,7 @@ def read_group_date(year):
     )
     
     data = query.execute()
-    st.write(data)
+    st.write()
     
     if data.error:
         print(f"An error occurred: {data.error}")
