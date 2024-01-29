@@ -40,7 +40,7 @@ def read_group_date():
     )
     
     data = query.execute()
-    st.write()
+    st.write(data)
     
 read_group_date()
 
