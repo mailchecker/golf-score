@@ -31,7 +31,7 @@ def read_data(selected_date=None):
         return []
 
 
-def read_group_date(year):
+def read_group_date():
     year = 2024
     query = (
         conn.table("golf_scores")
@@ -50,7 +50,7 @@ def read_group_date(year):
         for row in data.data:
             print(f"Date: {row['date']}, Count: {row['count']}")
 
-read_group_date(2024)
+read_group_date()
 
 
 # 데이터베이스에서 데이터 읽기
