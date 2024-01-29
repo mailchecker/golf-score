@@ -43,12 +43,6 @@ def read_group_date():
     data = query.execute()
     st.write()
     
-    if data.error:
-        print(f"An error occurred: {data.error}")
-    else:
-        for row in data.data:
-            print(f"Date: {row['date']}, Count: {row['count']}")
-
 read_group_date()
 
 
