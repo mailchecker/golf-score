@@ -31,11 +31,19 @@ def read_data(selected_date=None):
         return []
 
 
+  
+
 def read_group_date():
+
+    url: str = st.secrets["SUPABASE_URL"]
+    key: str = st.secrets["SUPABASE_KEY"]
+    supabase: Client = create_client(url, key)
+    
     year = 2024
     query = (
-        conn.table("golf_scores")
-        .select("date", count="exact")
+        supabase.table("golf_scores")
+        .select("date, count(name)", count="exact")
+        .where(f"extract(year from date) = {year}")
         .group("date")
         .order("date")
     )
