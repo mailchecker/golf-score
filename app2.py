@@ -30,6 +30,28 @@ def read_data(selected_date=None):
         st.error(f"데이터 불러오기 오류: {e}")
         return []
 
+
+def read_group_date(year):
+    query = (
+        conn.table("attendance")
+        .select("date, count(person_id)", count="exact")
+        .where(f"extract(year from date) = {year}")
+        .group("date")
+        .order("date")
+    )
+    
+    data = query.execute()
+    st.write(data)
+    
+    if data.error:
+        print(f"An error occurred: {data.error}")
+    else:
+        for row in data.data:
+            print(f"Date: {row['date']}, Count: {row['count']}")
+
+read_group_date()
+
+
 # 데이터베이스에서 데이터 읽기
 def read_data_test(selected_date=None):
     try:
