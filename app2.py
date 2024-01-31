@@ -25,7 +25,7 @@ def read_data(selected_date=None):
             query = query.eq("action_date", selected_date_str)
         query = query.order("result", desc=True)
         data = query.execute()
-        st.write(data)
+        #st.write(data)
         
         return data
     except Exception as e:
