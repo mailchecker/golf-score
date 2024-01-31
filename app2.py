@@ -22,7 +22,7 @@ def read_data(selected_date=None):
             # selected_date를 문자열 형식으로 변환
             selected_date_str = selected_date.strftime("%Y-%m-%d")
             # 특정 날짜에 해당하는 데이터만 필터링
-            query = query.eq("date", selected_date_str)
+            query = query.eq("action_date", selected_date_str)
         query = query.order("result", desc=True)
         data = query.execute()
         return data
@@ -36,7 +36,7 @@ def read_data_test(selected_date=None):
     try:
         if selected_date:
             selected_date_str = selected_date.strftime("%Y-%m-%d")
-            query = conn.query("*", table='golf_scores', ttl='0').eq("date", selected_date_str).order("result",
+            query = conn.query("*", table='golf_scores', ttl='0').eq("action_date", selected_date_str).order("result",
                                                                                                       desc=True).execute()
         else:
             query = conn.query("*", table='golf_scores', ttl='0').order("result", desc=True).execute()
@@ -50,12 +50,12 @@ def write_data(golfer_data):
     try:
         # 동일한 날짜와 이름을 가진 데이터가 있는지 확인
         #existing_data = conn.table("golf_scores").select("*").eq("date", golfer_data["date"]).eq("name", golfer_data["name"]).execute()
-        existing_data = conn.table("golf_scores").select("*", count="exact").eq("date", golfer_data["date"]).eq("name", golfer_data["name"]).execute()
+        existing_data = conn.table("golf_scores").select("*", count="exact").eq("action_date", golfer_data["action_date"]).eq("name", golfer_data["name"]).execute()
 
 
         if existing_data.count > 0:
             # 기존 데이터가 있으면 업데이트
-            response = conn.table("golf_scores").update(golfer_data).eq("date", golfer_data["date"]).eq("name", golfer_data["name"]).execute()
+            response = conn.table("golf_scores").update(golfer_data).eq("action_date", golfer_data["action_date"]).eq("name", golfer_data["name"]).execute()
         else:
             # 기존 데이터가 없으면 새로 삽입
             response = conn.table("golf_scores").insert([golfer_data]).execute()
@@ -71,7 +71,7 @@ def write_data(golfer_data):
 # 데이터베이스에서 데이터 삭제
 def delete_data(date, name):
     try:
-        response = conn.table("golf_scores").delete().eq("date", date).eq("name", name).execute()
+        response = conn.table("golf_scores").delete().eq("action_date", date).eq("name", name).execute()
         # 데이터 작업 성공 여부 확인
         if not response.data or response.data == []:
             raise Exception("데이터 작업에 실패했습니다.")
@@ -115,7 +115,7 @@ for i in range(number_of_golfers):
         # 승패 여부 선택 리스트 박스
         is_winner = st.selectbox('승패 여부', [True, False], key=f'winner_{i}')
 
-    golfers_data.append({'date': date_str, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result, 'iswinner': is_winner})
+    golfers_data.append({'action_date': date_str, 'name': name, 'stroke': stroke, 'handicap': handicap, 'result': result, 'iswinner': is_winner})
 
 
 # 저장 버튼
